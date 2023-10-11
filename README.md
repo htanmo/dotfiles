@@ -1,3 +1,3 @@
 # Dotfiles
 
-contains config files.
+Contains config files.
