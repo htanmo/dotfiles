@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-theme = "jellybeans"
-=======
+
 theme = "dracula"
->>>>>>> 7d253a9 ([Update])
 
 [editor]
 mouse = true
