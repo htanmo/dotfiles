@@ -1,11 +1,15 @@
+<<<<<<< HEAD
 theme = "jellybeans"
+=======
+theme = "dracula"
+>>>>>>> 7d253a9 ([Update])
 
 [editor]
 mouse = true
 cursorline = true
 true-color = true
 color-modes = true
-bufferline = "multiple"
+bufferline = "always"
 shell = ["zsh", "-c"]
 
 [editor.lsp]
