@@ -7,8 +7,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # Rust cargo path.
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Go path
-export PATH=$PATH:/usr/local/go/bin
+# Go path and variables
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOPATH
+export PATH=$PATH:$GOROOT/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -114,3 +118,6 @@ function zef () { zellij edit --floating "$*";}
 
 # Starship
 eval "$(starship init zsh)"
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
