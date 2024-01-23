@@ -119,6 +119,10 @@ function zef () { zellij edit --floating "$*";}
 
 # Starship
 eval "$(starship init zsh)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
+
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
