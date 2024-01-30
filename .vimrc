@@ -20,6 +20,8 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+Plug 'jiangmiao/auto-pairs'
+
 Plug 'junegunn/goyo.vim'
 "let g:goyo_linenr=1
 
@@ -28,6 +30,8 @@ Plug 'honza/vim-snippets'
 Plug 'nanotech/jellybeans.vim'
 
 Plug 'sheerun/vim-polyglot'
+
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 call plug#end()
 ":PlugInstall
@@ -38,8 +42,10 @@ let g:netrw_keepdir = 0
 let g:netrw_winsize = 30
 let g:netrw_localrmdir='rm -r'
 let g:netrw_localcopydircmd = 'cp -r'
-"let g:netrw_banner = 0
+let g:netrw_banner = 0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 nnoremap <leader>dd :Lexplore %:p:h<CR>
 nnoremap <Leader>da :Lexplore<CR>
@@ -51,6 +57,7 @@ noremap <Leader>j <C-W><C-J>
 noremap <Leader>u i_<ESC>r
 noremap <Leader>n :vs 
 noremap <Leader>q :q<CR>
+noremap <Leader>w :w<CR>
 noremap <Leader>o <C-O>
 noremap <Leader>i <C-I>
 noremap <Leader>a ggVG
