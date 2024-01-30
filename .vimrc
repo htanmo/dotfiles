@@ -63,6 +63,8 @@ noremap <c-down> <c-w>-
 noremap <c-left> <c-w>>
 noremap <c-right> <c-w><
 
+tnoremap <Esc> <C-\><C-n>
+
 set statusline=
 set laststatus=2
 
