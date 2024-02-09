@@ -23,15 +23,27 @@ let g:UltiSnipsEditSplit="vertical"
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'junegunn/goyo.vim'
-"let g:goyo_linenr=1
+" let g:goyo_linenr=1
+let g:goyo_height='80%'
+let g:goyo_width='80%'
 
 Plug 'honza/vim-snippets'
 
 Plug 'nanotech/jellybeans.vim'
 
+Plug 'tpope/vim-surround'
+
+Plug 'tpope/vim-repeat'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-commentary'
+
 Plug 'sheerun/vim-polyglot'
 
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+Plug 'Lokaltog/vim-monotone'
 
 call plug#end()
 ":PlugInstall
@@ -44,6 +56,25 @@ let g:netrw_localrmdir='rm -r'
 let g:netrw_localcopydircmd = 'cp -r'
 let g:netrw_banner = 0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+
+if stridx(&runtimepath, expand(vimDir)) == -1
+  " vimDir is not on runtimepath, add it
+  let &runtimepath.=','.vimDir
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
@@ -55,7 +86,7 @@ noremap <Leader>e <ESC>:e .<CR>
 noremap <Leader>r <C-R>
 noremap <Leader>j <C-W><C-J>
 noremap <Leader>u i_<ESC>r
-noremap <Leader>n :vs 
+noremap <Leader>n :nohlsearch<CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
 noremap <Leader>o <C-O>
@@ -89,6 +120,7 @@ set mousehide
 set hidden
 set noerrorbells
 set noswapfile
+set hlsearch
 set number
 set pastetoggle=
 set shiftwidth=4
@@ -102,7 +134,11 @@ set ttyfast
 set ruler
 set t_co=256
 set matchpairs+=<:>
+set splitbelow
+set splitright
 set cursorline
+set foldmethod=syntax
+set nofoldenable
 
 filetype on
 filetype plugin on
