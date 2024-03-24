@@ -26,3 +26,10 @@ vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true
 
 vim.opt.termguicolors = true
+
+vim.opt.signcolumn = 'yes'
+
+vim.cmd("colorscheme rose-pine")
+
+-- vim.opt.updatetime = 250
+-- vim.opt.ttimeoutlen = 5

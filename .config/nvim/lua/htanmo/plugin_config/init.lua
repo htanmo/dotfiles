@@ -1,6 +1,0 @@
-require("htanmo.plugin_config.lualine")
-require("htanmo.plugin_config.treesitter")
-require("htanmo.plugin_config.telescope")
-require("htanmo.plugin_config.completions")
-require("htanmo.plugin_config.mason")
-require("htanmo.plugin_config.lsp_config")
