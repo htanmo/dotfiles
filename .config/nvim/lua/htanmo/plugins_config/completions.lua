@@ -9,6 +9,21 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  window = {
+    documentation = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    },
+    completion = {
+      -- Use border for the completion window.
+      border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+
+      -- Due to the border, move left the completion window by 1 column
+      -- so that text in the editor and on completion item can be aligned.
+      col_offset = -1,
+
+      winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+    }
+  },
   completion = {
     completeopt = 'menu,menuone,noinsert',
   },
