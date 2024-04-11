@@ -5,8 +5,8 @@ mouse = true
 cursorline = true
 true-color = true
 color-modes = true
-bufferline = "always"
-shell = ["zsh", "-c"]
+bufferline = "multiple"
+shell = ["fish", "-c"]
 
 [editor.lsp]
 display-messages = true
@@ -31,4 +31,3 @@ hidden = false
 
 [editor.soft-wrap]
 enable = true
-
