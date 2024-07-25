@@ -1,11 +1,58 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Enable autocompletions
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
+zmodload -i zsh/complist
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Save history so we get auto suggestions
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+
+# Options
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances
+setopt interactive_comments # allow comments in interactive shells
+
+# Improve autocompletion style
+zstyle ':completion:*' menu select # select completions with arrow keys
+zstyle ':completion:*' group-name '' # group results by category
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+
+# Load antibody plugin manager
+source <(antibody init)
+
+# Plugins
+antibody bundle zdharma/fast-syntax-highlighting
+antibody bundle zsh-users/zsh-autosuggestions
+antibody bundle zsh-users/zsh-completions
+antibody bundle chr-fritz/docker-completion.zshplugin
+
+# Keybindings
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
+
+# Open new tabs in same directory
+if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
+  function chpwd {
+    printf '\e]7;%s\a' "file://$HOSTNAME${PWD// /%20}"
+  }
+  chpwd
+fi
+
+export PATH=$HOME/.local/bin:$PATH
 
 # Rust cargo path.
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$HOME/.cargo/bin:$PATH
 
 # Go path and variables
 export GOPATH=$HOME/go
@@ -15,71 +62,8 @@ export PATH=$PATH:$GOPATH
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-completions zsh-syntax-highlighting)
-
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vi'
-fi
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Zellij config
-function zr () { zellij run --name "$*" -- zsh -ic "$*";}
-function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
-function ze () { zellij edit "$*";}
-function zef () { zellij edit --floating "$*";}
-
-# ROS2
-source /opt/ros/humble/setup.zsh
-
 # Zoxide
 eval "$(zoxide init zsh)"
+
+# Starship
+eval "$(starship init zsh)"
