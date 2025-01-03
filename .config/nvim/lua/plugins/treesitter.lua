@@ -7,34 +7,34 @@
 ]]
 
 return {
-	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPre", "BufNewFile" },
-	build = ":TSUpdate",
-	config = function()
-		local treesitter = require("nvim-treesitter.configs")
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile" },
+    build = ":TSUpdate",
+    config = function()
+        local treesitter = require("nvim-treesitter.configs")
 
-		treesitter.setup({
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
+        treesitter.setup({
+            highlight = { enable = true },
+            indent = { enable = true },
+            ensure_installed = {
                 "c",
                 "cpp",
-				"json",
-				"javascript",
-				"typescript",
-				"rust",
-				"yaml",
-				"html",
-				"css",
-				"markdown",
-				"svelte",
-				"lua",
-				"dockerfile",
-				"gitignore",
-				"python",
-				"gitignore",
-			},
-			auto_install = true,
-		})
-	end,
+     			"json",
+                "javascript",
+                "typescript",
+                "rust",
+                "yaml",
+                "html",
+                "css",
+                "markdown",
+                "svelte",
+                "lua",
+                "dockerfile",
+                "gitignore",
+                "python",
+                "gitignore",
+            },
+            auto_install = true,
+        })
+    end,
 }
