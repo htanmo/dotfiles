@@ -1,4 +1,4 @@
-theme = "jellybeans"
+theme = "ayu_evolve"
 
 [editor]
 mouse = true
@@ -17,9 +17,9 @@ left = ["mode", "spinner", "file-name"]
 center = []
 right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
 separator = "│"
-mode.normal = "N"
-mode.insert = "I"
-mode.select = "S"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
 
 [editor.cursor-shape]
 insert = "bar"
