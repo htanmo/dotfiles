@@ -1,5 +1,5 @@
-width=600
-height=400
 mode=run
 colors=colors
+hide_scroll=true
+gtk_dark=true
 filter_rate=100
