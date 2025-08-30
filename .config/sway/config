@@ -21,12 +21,17 @@ set $menu wofi --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/.config/sway/background fill
+output * bg ~/.config/sway/wallpaper/sunflower.png fill
 
 #
 # Titlebars
 #
 default_border pixel 1
+
+#
+# Notification daemon
+#
+exec mako
 
 #
 # Example configuration:
@@ -212,8 +217,8 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set -5%
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
@@ -229,17 +234,35 @@ bindsym $mod+r mode "resize"
 bar {
     position top
 
-    # # When the status_command prints a new line to stdout, swaybar updates.
-    # # The default just shows the current date and time.
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        statusline #ebdbb2
+        background #3c3836
+
+        # Outline, Background, Foreground
+        inactive_workspace #282828 #282828 #928374
+        focused_workspace #83a598 #458588 #eddbb2
     }
 }
 
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+#
+# Screenshot
+#
+bindsym $mod+Shift+s exec 'grim $(date +\"%Y-%m-%d-%H%M%S.png\")'
+bindsym $mod+Shift+a exec 'slurp | grim -g - $(date +\"%Y-%m-%d-%H%M%S.png\")'
+
+#
+# For Obs and friends:
+# sudo pacman -S xdg-desktop-portal xdg-desktop-portal-wlr
+#
+exec dbus-update-activation-environment --systemd \
+    WAYLAND_DISPLAY \
+    DISPLAY \
+    SWAYSOCK \
+    XDG_CURRENT_DESKTOP=sway \
+    XDG_SESSION_DESKTOP=sway
 
 include /etc/sway/config.d/*
