@@ -1,4 +1,9 @@
-### Variables
+# +======================+
+# | Custom Configuration |
+# +======================+
+
+#
+# Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod1
@@ -178,6 +183,8 @@ input type:touchpad {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+    # Explicitly unfloat the windows summoned from the scratchpad.
+    # bindsym $mod+minus scratchpad show, floating disable
 
 #
 # Resizing containers:
@@ -205,6 +212,25 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Power management:
+#
+mode "power" {
+    # Power off
+    bindsym p exec swaynag -m "Are you sure you want to power off?" -b "Power Off" "systemctl poweroff"
+
+    # Reboot
+    bindsym r exec swaynag -m "Are you sure you want to reboot?" -b "Reboot" "systemctl reboot"
+
+    # Suspend
+    bindsym s exec swaylock && systemctl suspend
+
+    # Back to the default mode
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+x mode "power"
+
+#
 # Utilities:
 #
     # Special keys to adjust volume via PulseAudio
@@ -222,17 +248,16 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-
 # bar {
 #     swaybar_command waybar
 # }
-
 bar {
     position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while echo "$(printf "[%3d%%]" $(cat /sys/class/power_supply/BAT*/capacity)) $(date +'| %a | %Y-%m-%d | %X')"; do sleep 1; done
 
     colors {
         statusline #ebdbb2
@@ -251,7 +276,7 @@ bindsym $mod+Shift+s exec 'grim $(date +\"%Y-%m-%d-%H%M%S.png\")'
 bindsym $mod+Shift+a exec 'slurp | grim -g - $(date +\"%Y-%m-%d-%H%M%S.png\")'
 
 #
-# For Obs and friends:
+# For obs and friends:
 # sudo pacman -S xdg-desktop-portal xdg-desktop-portal-wlr
 #
 exec dbus-update-activation-environment --systemd \
