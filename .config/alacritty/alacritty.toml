@@ -1,17 +1,20 @@
 [window]
-decorations = "none"
+decorations = "Full"
 dynamic_padding = true
 startup_mode = "Maximized"
 # opacity = 0.95
+padding = { x = 0, y = 0 }
 title = "Alacritty"
 
 [general]
+live_config_reload = true
+ipc_socket = true
 import = [
     "~/.config/alacritty/themes/gruvbox_dark.toml"
 ]
 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty"
 
 [terminal]
 shell = { program = "/usr/bin/fish", args = ["-l"] }
